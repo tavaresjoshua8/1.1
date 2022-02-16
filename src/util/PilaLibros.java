@@ -2,13 +2,15 @@ package util;
 
 public class PilaLibros {
     private Libro[] elementos;
-    private int tope;
+    private int tope = -1;
     private int max;
 
-    public PilaLibros(int max) {
+    public PilaLibros(int max) throws RuntimeException {
+        if(max<=0)
+            throw new RuntimeException("El tamaño de la pila debe ser mayor que 0");
+
         this.max = max;
         this.elementos = new Libro[max];
-        this.tope = -1;
     }
     
     public void push(Libro libro) {
@@ -17,14 +19,11 @@ public class PilaLibros {
             return;
         }
         
-        this.tope++;
-        this.elementos[this.tope] = libro;
+        this.elementos[++this.tope] = libro;
     }
 
     public Libro pop() {
-        Libro libro = this.elementos[this.tope];
-        this.tope--;
-        return libro;
+        return this.elementos[this.tope--];
     }
 
     public Libro elementoArriba() {        
